@@ -1,0 +1,140 @@
+
+{% extends "layouts/main.html" %}
+{% load static %}
+
+
+
+{% block content %}
+<div class="conteiner d-flex">
+    <div class="sidebar m-5  d-block ">
+        <div class="gradientesdivs shadow-drop-center ">
+            <div class="card perfil1 py-1 gradientesdivs2" >
+                {% if user.perfil.image %}
+                <img class=" rounded-circle fotoperfil shadow-drop-center"
+                src="{{ user.perfil.image.url}}" alt="imagen default">
+                {% else %}
+                <img class="card-img-top rounded-circle fotoperfil shadow-drop-center"
+                src="{% static 'img/usuario.png' %}" alt="imagen default">
+                {% endif %}
+                <div class="card-body ">
+                    <h5 class="card-title font-weight-bold">{{ user.username }}</h5>
+                    <h6 class="card-title font-weight-bold">@{{ user }}</h6>
+                    
+
+                    <p class="card-text">{{ user.perfil.bio }} </p>
+                    <h6 class="card-title font-weight-bold">
+                    {{ user.perfil.followers.count }} Followers   
+                    {{ user.perfil.following.count }} Following
+                    </h6>
+                    
+                    <div class="d-flex justify-content-center">
+                        <a href="{% url 'perfil' request.user %}" class="a">
+                            <button class="button button-sm" type="button" >
+                                <span>Mi Perfil</span>
+                            </button>
+                        </a>
+                    </div>
+                    
+                </div>
+                
+            </div>
+
+            
+        </div>    
+        <div class="d-flex justify-content-center mt-3">
+            <a href="{% url 'editar' %}" class="a py-2">
+                <button class="button button-sm" type="button">
+                    <span>Editar perfil</span>
+                </button>
+            </a>
+        </div>
+    </div>
+
+    <div class="content">
+        
+        
+        {% for p in posts %}
+            
+        <div class="content gradientesdivs shadow-drop-center my-2 mx-auto body-header">
+            {% if request.user.is_authenticated and request.user == p.user %}
+            <div class="container ">
+                <div class="d-flex justify-content-end">
+                    <a href="/post/{{ p.id }}" class="color mx-4"><i class="bi bi-pencil-square"></i></a>
+                    <a href="{% url 'delete_post' id=p.id %}" class="color"><i class="bi bi-trash3"></i></a>
+                </div>
+            </div>
+            {% endif %}
+            <div class="container ml-2">
+                <div class="row">
+                    
+                    <div class="row">
+                        <div class="col-12 d-flex align-items-center">
+                            <div>
+                                {% if p.user.perfil.image %}
+                                    <img class="rounded-circle shadow-drop-center"
+                                         src="{{ p.user.perfil.image.url }}" alt="imagen del perfil" width="50">
+                                {% else %}
+                                    <img class="rounded-circle shadow-drop-center"
+                                         src="{% static 'img/usuario.png' %}" alt="imagen default" width="20">
+                                {% endif %}
+                            </div>
+                            <a href="{% url 'perfil' p.user %}" class="ml-2 mb-0">{{ p.user.username }}</a>
+                            <p class="mt-3 ml-2">@{{ p.user }}</p> 
+                            
+                        </div>
+                        <div class="container-fluid col-10 ml-5">
+                            <h2>{{ p.title }}</h2>
+                            <h4 class="mx-4">{{ p.general }}</h4>
+                            <p>{{ p.text }}</p>
+                        </div>
+                    </div>
+                    <div class="row col-10">
+                        <a href="{% url 'paginapost' p.id %}">
+                            <button class="button button-sm" type="button">
+                                <span><i class="bi bi-chat bi-sm"></i></span>
+                            </button>
+                        </a>
+                    
+                        <a href="{% url 'like' id=p.id %}" class="a">
+                            <button class="button button-sm ml-2" type="submit">
+                                <span><i class="bi bi-suit-heart"></i></span>
+                            </button>
+                        </a>
+                    
+                        <div class="ml-auto">
+                            <p class="color">{{ p.likes }} Likes</p>
+                        </div> 
+                        
+                        <div class="retweet-count"> </div>
+
+    
+                    </div>
+
+                </div>
+                
+            </div> 
+            
+        </div>
+        {% endfor %}
+        
+    </div>
+    <div class="sidebar m-5  d-block ">
+        <div class="gradientesdivs shadow-drop-center ">
+            <h6>Sugerencias para ti</h6>
+            <ul>
+                {% for p in sugerencias %}
+                    <li>
+                        {{ request.user.sugerencias.username }}
+                        <a href="{% url 'follow' suggestion.username %}">
+                            <button class="button button-sm" type="button">
+                                <span>Seguir</span>
+                            </button>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul> 
+        </div>
+    </div>
+</div>
+{% endblock %}
+

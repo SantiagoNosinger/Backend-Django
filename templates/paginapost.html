@@ -1,0 +1,106 @@
+{% extends "layouts/main.html" %}
+{% load static %}
+
+{% block content %}
+<div class="conteiner  my-5 py-5">
+    <div >  
+        <div class="container-fluid d-flex">
+            <div class="sidebar m-5  ">
+                <div class="gradientesdivs shadow-drop-center ">
+                    <div class="card perfil1 py-1 gradientesdivs2" >
+                        {% if request.user.perfil.image %}
+                            <img class="rounded-circle shadow-drop-center"
+                                    src="{{ request.user.perfil.image.url }}" alt="imagen del perfil" width="50">
+                        {% else %}
+                            <img class="rounded-circle shadow-drop-center"
+                                    src="{% static 'img/usuario.png' %}" alt="imagen default" width="20">
+                        {% endif %}
+                        <div class="card-body ">
+                            <h5 class="card-title font-weight-bold">{{ request.user.username }}</h5>
+                            <h6 class="card-title font-weight-bold">@{{ request.user }}</h6>
+                            
+        
+                            <p class="card-text">{{ request.user.profile.bio }}</p>
+                            <h6 class="card-title font-weight-bold">
+                            {{ request.user.profile.followers.count }} Followers   
+                            {{ request.user.profile.following.count }} Following
+                            </h6>
+                            <a href="#" class="btn  text-white rounded-pill">Mi perfil</a>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+
+            <div class="container py-4 my-3 gradientesdivs2 shadow-drop-center">
+                <div class="">
+                    
+                    <div class="col-10">
+                        {% if p.user.perfil.image %}
+                            <img class="rounded-circle shadow-drop-center"
+                                    src="{{ p.user.perfil.image.url }}" alt="imagen del perfil" width="50">
+                        {% else %}
+                            <img class="rounded-circle shadow-drop-center"
+                                    src="{% static 'img/usuario.png' %}" alt="imagen default" width="20">
+                        {% endif %}
+                        <p class="ml-2 mb-0"> {{post.user.username}}</p>
+                        <div class="container-fluid">
+                            <h2>{{ post.title }}</h2>
+                            <h4 class="mx-4">{{post.general}}</h4>
+                            <p>{{ post.text }}</p>
+                        </div>    
+                    </div>
+                    {% if request.user.is_authenticated %}
+                    <div class="container-fluid">
+                        <form method="Post" action="/comment/">
+                            {% csrf_token %}
+                            <input type="hidden" value="{{ post.id }}" name="post">
+                            <div class="form-group my-3 shadow-drop-center ">
+                                <textarea class="form-control textarea bg-dark text-white" name="text" placeholder="Escribe un comentario"></textarea>
+                            </div>
+                            <div class="form-group text-end">
+                                <button class="button my-1 shadow-drop-center" type="submit"><span><i class="bi bi-send"></i></span></button>
+                            </div>
+                        </form>
+                    </div>
+                    {% endif %}
+
+                    {% if request.user.is_authenticated and request.user == post.user %}
+                        <div>
+                            <a href="/post/{{ post.id }}" class="color float-end"><i class="bi bi-pencil-square"></i></a>
+                        </div>
+                    {% endif %}
+
+                    {% for p in user.likes.all %}
+                        
+                        {% if p.user.likes %}
+                        
+                            <button class="button button-sm ml-2" type="submit">
+                                <span><i class="bi bi-suit-heart rojo"></i></span>
+                            </button>
+                        
+                        
+                        {% endif %}
+                    {% endfor %}
+                        
+
+                    {% for c in post.comment_set.all %}
+                    <div class="container-fluid py-4 borde">
+                        {% if request.user.is_authenticated and request.user == c.user %}
+                        <div class="container ">
+                            <div class="d-flex justify-content-end">
+                                <a href="{% url 'delete_comment' comment_id=c.id %}" class="color"><i class="bi bi-trash3"></i></a>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {{ c.user.username}}:
+                        <div class="container-fluid">
+                            {{ c.text }}
+                        </div>
+                    </div>
+                    {% endfor %}                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

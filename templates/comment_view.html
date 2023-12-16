@@ -1,0 +1,11 @@
+<form method="post" action="{% url 'comment' %}">
+    {% csrf_token %}
+    <input type="hidden" value="{{ post_id }}" name="post">
+    <input type="hidden" value="{% if parent_comment %}{{ parent_comment.id }}{% endif %}" name="parent_comment">
+    <div class="form-group my-3 shadow-drop-center ">
+        <textarea class="form-control textarea bg-dark text-white" name="text" placeholder="{% if parent_comment %}Responder al comentario{% else %}Escribe un comentario{% endif %}"></textarea>
+    </div>
+    <div class="form-group text-end">
+        <button class="button my-1 shadow-drop-center" type="submit"><span><i class="bi bi-send"></i></span></button>
+    </div>
+</form>

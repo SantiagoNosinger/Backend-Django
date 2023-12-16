@@ -1,0 +1,42 @@
+{% extends "layouts/main.html" %}
+{% block content %}
+<div class="conteiner  my-5 py-5">
+    
+    <div class="conteiner-fluid py-3 mx-5 mg-3 gradientesdivs2 shadow-drop-center ">
+        <h1>Registrarse</h1>
+
+        <form method="POST" action="">
+            {% csrf_token %}
+            
+            <div class="form-group my-3">
+                <label> Usuario </label>
+                <input type="text" class="form-control bg-dark borde text-white" name="username" placeholder="Nombre de Usuario">
+            </div>
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <div class="form-group my-3">
+                <label> Email </label>
+                <input type="text" class="form-control bg-dark borde text-white" name="email" placeholder="email">
+            </div>
+
+            <div class="form-group my-3">
+                <label> Contraseña </label>
+                <input type="password" class="form-control bg-dark borde text-white" name="password" placeholder="Contraseña">
+            </div>
+
+            <div class="form-group my-3">
+                <label> Confirmar contraseña: </label>
+                <input type="password" class="form-control bg-dark borde text-white" name="confirm_password" placeholder="confirmacion">
+            </div>
+            <button class="button" type="submit"><span>Iniciar sesion</span></button>
+            
+        </form>
+    </div>
+    
+</div>
+{% endblock %} 

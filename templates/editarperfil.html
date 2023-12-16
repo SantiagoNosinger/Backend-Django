@@ -1,0 +1,31 @@
+{% extends "layouts/main.html" %}
+{% load static %}
+
+
+
+{% block content %}
+
+  
+  <div class="conteiner  my-5 py-5">
+    
+    <div class="conteiner-fluid py-3 mx-5 mg-3 gradientesdivs2 shadow-drop-center ">
+      <h2>Editar Perfil</h2>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+          
+
+          <label for="id_bio">Biografía:</label>
+          <textarea id="id_bio" name="bio" class="form-control">{{ perfil.bio }}</textarea>
+        </div>
+        <div class="form-group">
+          <label for="id_image">Imagen de perfil:</label>
+          <input type="file" id="id_image" name="image" accept="image/*">
+        </div>
+        <button type="submit" class="button"><span>Guardar cambios</span></button>
+      </form>
+    
+</div>
+{% endblock %} 
+
+

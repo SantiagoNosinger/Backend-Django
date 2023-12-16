@@ -1,0 +1,172 @@
+.navbar {
+    background-color: #111; 
+    border-bottom: 5px solid transparent;
+    border-image: linear-gradient(150deg, #9500ff, #09f, #00DDFF);
+    opacity: 85%;
+    position: fixed; 
+    width: 100%;
+    padding: 4px;
+    text-align: center; 
+    z-index: 900; 
+    margin-bottom: 5px
+}
+
+.texto{
+    color: #C3FCF1;
+}
+
+.ml-auto {
+    margin-left: auto;
+}
+.gradientesdivs{
+    background-color: #111; 
+    border: 2px solid #9500ff;
+   
+    color: #fff;
+    border-radius: 30px;
+    padding-top: 5rem;
+    padding: 15px;
+}
+
+
+.gradientesdivs2 {
+    background-color: #111; 
+    border: 2px solid #9500ff ;
+    
+    border-radius: 30px;
+    color: #fff;
+    padding: 5px; 
+}
+.login{
+    margin: 23vmax!important;
+    padding-top: 0rem;
+}
+.m-5 {
+    margin: 5vmax!important;
+}
+
+.shadow-drop-center{animation:shadow-drop-center 0.4s linear both} @keyframes shadow-drop-center{0%{box-shadow:0 0 0 0 transparent}100%{box-shadow:0 0 20px 0 rgba(227, 17, 255, 0.55)}}
+
+.scale-up-center{animation:scale-up-center 0.4s; } @keyframes scale-up-center{ 0%{transform:scale(.5)} 100%{transform:scale(1)} }
+
+.fondo{
+    background-image: url(../img/fondo.jpg);
+    background-size: cover;
+}
+.button{
+    border: 0;
+    background-image: linear-gradient(
+        150deg,
+        #9500ff,
+        #09f,
+        #00DDFF
+    );
+    border-radius: 8px;
+    color: #fff;
+    display: flex;
+    font-size: 18px;
+    padding: 1px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.button span{
+    background-color: #111;
+    padding: 10px 18px;
+    border-radius: 6px;
+    transition: .3s;
+}
+
+.button:hover span{
+    background: none;
+}
+
+.button:active{
+    transform: scale(0.9);
+}
+
+.borde{
+    border-image: linear-gradient(150deg, rgb(24, 80, 117), rgb(24, 80, 117), rgb(24, 80, 117));
+    border-bottom: 2px solid transparent;
+    border-image-slice: 10;
+    
+}
+
+
+
+.textarea{
+    background-color: #111; 
+    border: 2px solid transparent;
+    border-image: linear-gradient(150deg, #9500ff, #09f, #00DDFF);
+    border-image-slice: 10;
+    
+    color: #fff;
+    padding: 5px; 
+}
+
+.dark{
+    background-color: #111;
+}
+
+.color{
+    color: #aa00a2;
+
+}
+
+.avator {
+    border-radius: 100px;
+    width: 60px;
+    margin-right: 15px;
+}
+  
+.card {
+    border: none;
+}
+
+.post-wrap {
+    max-width: 490px;
+    background: #fff;
+    margin: 0 auto;
+    margin-top: 50px;
+    border-radius: 3px;
+    padding: 30px;
+    border-bottom: 1px solid #e6ecf0;
+    border-top: 1px solid #e6ecf0;
+}
+.card-header {
+background-color: #1E96EB /*#E0245E*/;
+color: white;
+text-align: center;
+font-weight: bold;
+border: none;
+}
+
+
+
+.perfil1{
+    width: 20rem; 
+    text-align: center; 
+    border-radius: 20px;
+
+}
+
+.fotoperfil{
+    width: 46%; 
+    position:relative; 
+    left: 85px; 
+    
+}
+
+a {
+    text-decoration: none !important;
+}
+
+a:hover,
+a:active,
+a:focus {
+    text-decoration: none !important;
+}
+
+.rojo{
+    color:red
+}

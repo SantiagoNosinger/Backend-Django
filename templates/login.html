@@ -1,0 +1,34 @@
+{% extends "layouts/main.html" %}
+{% block content %}
+
+
+<div class="text-center">
+    <div class="gradientesdivs2 shadow-drop-center login">  
+        <div class="py-5 mx-4">
+            <form method="POST" action="">
+                {% csrf_token %}
+
+                <h1>Iniciar secion</h1>
+                <div class="form-group my-3">
+                    <label> Usuario </label>
+                    <input type="text" class="form-control" name="username" placeholder="Nombre de Usuario">
+                </div>
+
+                <div class="form-group my-3">
+                    <label> Contraseña </label>
+                    <input type="password" class="form-control" name="password" placeholder="Contraseña">
+                </div>
+                
+                <div class="row p-4 justify-content-between">
+                    <button class="button" type="submit">
+                        <span>Iniciar sesión</span>
+                    </button>
+                    
+                    <button class="button"><span><a href="/registro" class="text-white">Registrarse</a></span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+{% endblock %} 

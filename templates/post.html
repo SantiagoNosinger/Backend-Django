@@ -1,0 +1,40 @@
+
+{% extends "layouts/main.html" %}
+{% block content %}
+<div class="conteiner  my-5 py-5">
+    <div class="container-fluid gradientesdivs2 shadow-drop-center">  
+        <div class="pd-3 py-3 mx-4">
+            <h1>Nuevo post</h1>
+
+            <form method="POST" action="">
+                {% csrf_token %}
+                
+                {% if post is not None %}
+                    <input type="number" value="{{post.id}}" name="id">
+                {% endif %}
+                
+                <div class="form-group my-3">
+                    
+                    <input type="text" class="form-control" name="title" placeholder="Artista o banda..."
+                    {% if post is not None %}
+                        value="{{post.title}}"
+                    {% endif %}
+                    >
+                </div>
+                <div class="form-group my-3">
+                    <label> Texto </label>
+                    <textarea class="form-control" name="general" placeholder="Puedes escribir una referencia como album, cancion, etc...">{% if post is not None %}{{post.general}}{% endif %}</textarea>
+                </div>
+                <div class="form-group my-3">
+                    <label> General </label>
+                    <textarea class="form-control" name="text" placeholder="Escribe lo que quieras...">{% if post is not None %}{{post.text}}{% endif %}</textarea>
+                </div>
+                <button class="button" type="submit">
+                    <span>Enviar</span>
+                </button>
+            </form>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}
