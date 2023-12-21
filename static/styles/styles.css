@@ -31,16 +31,31 @@
 
 .gradientesdivs2 {
     background-color: #111; 
-    border: 2px solid #9500ff ;
+    border: 2px solid #0a030f ;
     
     border-radius: 30px;
     color: #fff;
-    padding: 5px; 
+    padding: 100px; 
 }
-.login{
-    margin: 23vmax!important;
-    padding-top: 0rem;
+
+.gradientesdivs3{
+    background-color: #111; 
+    border: 2px solid #9500ff;
+   
+    color: #fff;
+    border-radius: 30px;
+    padding-top: 5rem;
+    padding: 15px;
+    
+
 }
+
+.boton{
+    background-color: #111;
+    border: 0;
+    display: flex;
+}
+
 .m-5 {
     margin: 5vmax!important;
 }
@@ -153,7 +168,7 @@ border: none;
 .fotoperfil{
     width: 46%; 
     position:relative; 
-    left: 85px; 
+    
     
 }
 
@@ -169,4 +184,13 @@ a:focus {
 
 .rojo{
     color:red
+}
+
+.divpost{
+    background-color: #111; 
+    border: 2px solid #9500ff ;
+    
+    border-radius: 30px;
+    color: #fff;
+    padding: 20px; 
 }

@@ -175,3 +175,14 @@ def like(request, id):
     post.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', reverse('paginapost', args=[id])))
 
+def likes_modal(request, post_id):
+    post = Post.objects.get(id=post_id)
+    likes_users = post.get_likes_users()
+    return render(request, 'likes_modal.html', {'likes_users': likes_users})
+
+@login_required
+def sugerencias_seguir(request):
+    perfil_actual = request.user.perfil
+    sugerencias = perfil_actual.sugerencias_seguir()
+    context = {'sugerencias': sugerencias}
+    return redirect(request.META.get('HTTP_REFERER', 'home'), context)

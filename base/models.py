@@ -18,6 +18,9 @@ class Post(models.Model):
     
     class Meta:
         ordering = ['-created']
+    
+    def get_likes_users(self):
+        return self.post_like.values_list('user__username', flat=True)
 
     
     
@@ -50,8 +53,11 @@ class Perfil(models.Model):
         return User.objects.filter(id__in=user_ids)
     
     def sugerencias_seguir(self):
-        users_to_follow = User.objects.exclude(id__in=self.following()).exclude(id=self.user.id)
+        users_to_follow = User.objects.exclude(id__in=self.following()).exclude(id=self.user.id).exclude(id__in=self.followers())
         return users_to_follow
+    
+    def get_likes_users(self):
+        return self.post_like.values_list('user__username', flat=True)
     
 class Seguidores(models.Model):
     from_user = models.ForeignKey(User, related_name='seguidores', on_delete=models.CASCADE)

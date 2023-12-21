@@ -5,10 +5,11 @@
 
 
 {% block content %}
-<div class="conteiner d-flex">
-    <div class="sidebar m-5  d-block ">
+<div class="conteiner d-flex" style=" margin-top: 100px;">
+    
+    <div class="sidebar m-5  d-block  con">
         <div class="gradientesdivs shadow-drop-center ">
-            <div class="card perfil1 py-1 gradientesdivs2" >
+            <div class=" perfil1 py-1 " >
                 {% if user.perfil.image %}
                 <img class=" rounded-circle fotoperfil shadow-drop-center"
                 src="{{ user.perfil.image.url}}" alt="imagen default">
@@ -28,7 +29,7 @@
                     </h6>
                     
                     {% if request.user.is_authenticated %}
-                        {% if user.username != request.user.username %}
+                        {% if request.user.username != user.username %}
                             {% if user not in request.user.perfil.following %}
                             <div class="d-flex justify-content-center">
                                 <a href="{% url 'follow' user %}" class="a">
@@ -79,7 +80,7 @@
                                          src="{{ p.user.perfil.image.url }}" alt="imagen del perfil" width="50">
                                 {% else %}
                                     <img class="rounded-circle shadow-drop-center"
-                                         src="{% static 'img/usuario.png' %}" alt="imagen default" width="20">
+                                         src="{% static 'img/usuario.png' %}" alt="imagen default" width="50">
                                 {% endif %}
                             </div>
                             <a href="{% url 'perfil' p.user %}" class="ml-2 mb-0">{{ p.user.username }}</a>
@@ -140,8 +141,8 @@
             <ul>
                 {% for p in sugerencias %}
                     <li>
-                        {{ sugerencias.username }}
-                        <a href="{% url 'follow' suggestion.username %}">
+                        {{ p.username }}
+                        <a href="{% url 'follow' p.username %}">
                             <button class="button button-sm" type="button">
                                 <span>Seguir</span>
                             </button>

@@ -1,0 +1,23 @@
+{% extends "layouts/main.html" %}
+
+<div class="conteiner  my-5 py-5 " style="max-width: 700; margin-left: 500px; margin-right: 500px;" id="ventana">
+    <div class="container-fluid gradientesdivs2 shadow-drop-center">
+        {% for p in followers %}
+        <ul>
+            <li>
+                @{{p.user.followers}}
+            </li>
+        </ul>
+        {% endfor %}
+    </div>
+</div>
+
+{% block extrajs %}
+<script type="">
+    function  abrir_modal(url) {
+        $('#edicion').load(url,function(){
+            $(this).modal('show');
+        });
+    }
+</script>
+{% endblock extrajs %}

@@ -5,16 +5,16 @@
 
 
 {% block content %}
-<div class="conteiner d-flex">
-    <div class="sidebar m-5  d-block ">
+<div class=" d-flex py-5">
+    <div class="sidebar m-5  d-block  con">
         <div class="gradientesdivs shadow-drop-center ">
-            <div class="card perfil1 py-1 gradientesdivs2" >
+            <div class=" perfil1 py-1 " >
                 {% if user.perfil.image %}
-                <img class=" rounded-circle fotoperfil shadow-drop-center"
-                src="{{ user.perfil.image.url}}" alt="imagen default">
+                <img class=" rounded-circle  shadow-drop-center"
+                src="{{ user.perfil.image.url}}" alt="imagen default" width="100">
                 {% else %}
-                <img class="card-img-top rounded-circle fotoperfil shadow-drop-center"
-                src="{% static 'img/usuario.png' %}" alt="imagen default">
+                <img class="rounded-circle  shadow-drop-center"
+                src="{% static 'img/usuario.png' %}" alt="imagen default" width="170">
                 {% endif %}
                 <div class="card-body ">
                     <h5 class="card-title font-weight-bold">{{ user.username }}</h5>
@@ -22,21 +22,60 @@
                     
 
                     <p class="card-text">{{ user.perfil.bio }} </p>
-                    <h6 class="card-title font-weight-bold">
-                    {{ user.perfil.followers.count }} Followers   
-                    {{ user.perfil.following.count }} Following
-                    </h6>
-                    
+                    <div class="row justify-content-center">
+                        <a type="button" class="boton " data-bs-toggle="modal" data-bs-target="#seguidores">
+                            {{ user.perfil.followers.count }} Seguidores
+                        </a>
+
+                        <a type="button" class="boton ml-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <span>{{ user.perfil.following.count }} Siguiendo</span>
+                        </a>       
+                    </div>
+                    {% if request.user.is_authenticated %}
                     <div class="d-flex justify-content-center">
                         <a href="{% url 'perfil' request.user %}" class="a">
-                            <button class="button button-sm" type="button" >
+                            <button class="button button-sm mt-2" type="button" >
                                 <span>Mi Perfil</span>
                             </button>
                         </a>
                     </div>
-                    
+                    {% endif %}
                 </div>
-                
+               
+                    <div class="modal fade sh" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content gradientesdivs shadow-drop-center ">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Seguidos</h5>
+                                    
+                                </div>
+                                <div class="modal-body text-white">
+                                    <ul>
+                                        {% for seguidor in user.seguidores.all %}
+                                            <li>{{ seguidor.to_user.username }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade sh" id="seguidores" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content gradientesdivs shadow-drop-center ">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Seguidores</h5>
+                                    
+                                </div>
+                                <div class="modal-body text-white">
+                                    <ul>
+                                        {% for seguidor in user.seguimiento.all %}
+                                        <li>{{ seguidor.from_user.username }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
             </div>
 
             
@@ -75,7 +114,7 @@
                                          src="{{ p.user.perfil.image.url }}" alt="imagen del perfil" width="50">
                                 {% else %}
                                     <img class="rounded-circle shadow-drop-center"
-                                         src="{% static 'img/usuario.png' %}" alt="imagen default" width="20">
+                                         src="{% static 'img/usuario.png' %}" alt="imagen default" width="50">
                                 {% endif %}
                             </div>
                             <a href="{% url 'perfil' p.user %}" class="ml-2 mb-0">{{ p.user.username }}</a>
@@ -100,9 +139,12 @@
                                 <span><i class="bi bi-suit-heart"></i></span>
                             </button>
                         </a>
-                    
+                        
+                        
                         <div class="ml-auto">
-                            <p class="color">{{ p.likes }} Likes</p>
+                            <a type="button" class="boton ml-auto" data-bs-toggle="modal" data-bs-target="#likes">
+                                <span class="color">{{ p.likes }} Likes</span>
+                            </a>
                         </div> 
                         
                         <div class="retweet-count"> </div>
@@ -111,7 +153,25 @@
                     </div>
 
                 </div>
-                
+                <div class="modal fade sh" id="likes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content gradientesdivs shadow-drop-center ">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Seguidos</h5>
+                                
+                            </div>
+                            <div class="modal-body text-white">
+                                <ul>
+                                    
+                                    {% for like in post.post_like.all %}
+                                        <li>{{ like.user.username }}</li>
+                                    {% endfor %}
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div> 
             
         </div>

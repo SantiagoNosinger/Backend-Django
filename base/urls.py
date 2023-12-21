@@ -19,5 +19,7 @@ urlpatterns = [
     path('unfollow/<str:username>/', views.unfollow, name='unfollow'),
     path('like/<int:id>', views.like, name='like'),
     path('delete_comment/<int:comment_id>/', views.delete_comment, name='delete_comment'),
+    path('sugerencias/', views.sugerencias_seguir, name='sugerencias'),
+    path('likes_modal/<int:id>/', views.likes_modal, name='likes_modal')
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
